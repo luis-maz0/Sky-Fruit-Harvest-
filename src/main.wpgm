@@ -1,0 +1,7 @@
+import wollok.game.*
+import configuration.*
+
+program main {
+	configuration.startLevel()
+	game.start();
+}
