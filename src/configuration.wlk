@@ -1,9 +1,12 @@
 import wollok.game.*
 import character.*
+import texts.*
 
 object configuration{
 	//PROPERTIES
 	const character = new Character()
+	const characterScore = new ScoreText(character = character)
+	const gameMenu = new MenuText()
 	const gameTitle = 'Sky Fruit Harvest'
 	const boardBackground = './img/background.png'
 	const boardHeight = 13
@@ -12,11 +15,26 @@ object configuration{
 	const property rightBoardLimit = game.at(boardWidth-1,0)
 	
 	//GAME START 
+	method showMenu(){
+		self.loadScreen()
+		game.addVisual(gameMenu)
+		self.startGame()
+	}
+	method startGame(){
+		keyboard.enter().onPressDo{
+			self.startLevel()
+		}
+	} 
 	method startLevel(){
+		self.clearScreen()
 		self.loadScreen()
 		self.loadCharacter()
+		self.loadScore()
 		self.defineKeys()
-	} 
+	}
+	method clearScreen(){
+		game.clear()
+	}
 	
 	//GENERATE UI
 	method loadScreen(){
@@ -27,6 +45,9 @@ object configuration{
 	}
 	method loadCharacter(){
 		game.addVisual(character)	
+	}
+	method loadScore(){ 
+		game.addVisual( characterScore )
 	}
 	
 	//KEYBOARD MOVEMENT
