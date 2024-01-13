@@ -25,4 +25,5 @@ class Character{
 			position = self.position().right(1)
 		}
 	}
+	
 }

@@ -1,6 +1,7 @@
 import wollok.game.*
 import character.*
 import texts.*
+import fallingObjects.*
 
 object configuration{
 	//PROPERTIES
@@ -31,6 +32,8 @@ object configuration{
 		self.loadCharacter()
 		self.loadScore()
 		self.defineKeys()
+		self.loadFallingObjects()
+		self.collisionWithCharacter()
 	}
 	method clearScreen(){
 		game.clear()
@@ -49,6 +52,9 @@ object configuration{
 	method loadScore(){ 
 		game.addVisual( characterScore )
 	}
+	method loadFallingObjects(){
+		game.onTick(300,"test",{ new Apple(eventName = "TestFallingObject", image="./img/manzana.png").appearObject()})
+	}
 	
 	//KEYBOARD MOVEMENT
 	method defineKeys(){
@@ -57,4 +63,9 @@ object configuration{
 		keyboard.j().onPressDo{ /*Special items*/}
 		keyboard.k().onPressDo{ /*Special items*/}
 	}
+	//COLLISION WITH CHARACTER
+	method collisionWithCharacter(){
+		game.onCollideDo(character, { fallingObject => fallingObject.collisionWithCharacter(character) }) 
+	}
+	
 }
