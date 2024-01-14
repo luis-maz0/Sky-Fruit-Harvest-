@@ -53,7 +53,7 @@ object configuration{
 		game.addVisual( characterScore )
 	}
 	method loadFallingObjects(){
-		game.onTick(300,"test",{ new Apple(eventName = "TestFallingObject", image="./img/manzana.png").appearObject()})
+		game.onTick(300,"Fruits",{ new Fruit(eventName = "FallingFruits").appearObject()})
 	}
 	
 	//KEYBOARD MOVEMENT

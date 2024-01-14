@@ -2,14 +2,15 @@ import wollok.game.*
 import configuration.*
 
 class FallingObject {
+	var property image = null
 	var property eventName
-	var property image
 	var property speed = 200
 	var property fallingObjectX = 9
 	var property fallingObjectY = 11
 	var property position = game.at( 0.randomUpTo(fallingObjectX),fallingObjectY)
 	
 	method appearObject(){
+		self.selectFruitImage()
 		game.addVisual(self)
         self.fall()
 	}
@@ -31,11 +32,16 @@ class FallingObject {
 		}
 	}
 	method thereIsFallingObject() = game.hasVisual(self)
+	//ABSTRACT METHODS 
 	method collisionWithCharacter(character)
+	method selectFruitImage()
 }
-class Apple inherits FallingObject{
+class Fruit inherits FallingObject{
 	override method collisionWithCharacter(character){
 		character.score(5)
 		self.disappear()
+	}
+	override method selectFruitImage(){
+		image = ["./img/apple.png", "./img/orange.png", "./img/pear.png"].anyOne()	
 	}
 }
