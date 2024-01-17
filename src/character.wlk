@@ -27,16 +27,15 @@ class Character{
 	}
 	//LIFE 
 	method takeDamage(){
-		if(not self.itsDead()){
+		if(not self.isDead()){
 			self.loseLife()	
 		}
 	}
-	method itsDead() = life.equals(0)
+	method isDead() = life < 1
 	method loseLife(){
-		configuration.loseHeart()
-		life -= 1
+		life = life - 1
 	} 
 	method gainLife(){
-		life += 1 
+		life = life + 1 
 	}
 }

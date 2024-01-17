@@ -48,7 +48,8 @@ class Fruit inherits FallingObject{
 class PoisonousObject inherits FallingObject{
 	override method collisionWithCharacter(character){
 		character.takeDamage()
-		configuration.loadHeartBar()
+		configuration.loseHeart()
+		configuration.checkEndConditions()
 		self.disappear()
 	}
 	override method selectFruitImage(){

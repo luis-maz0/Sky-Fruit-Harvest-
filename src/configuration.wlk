@@ -8,7 +8,7 @@ object configuration{
 	//PROPERTIES
 	const character = new Character()
 	const characterScore = new ScoreText(character = character)
-	const property heartBar = new HeartBar(characterHearts = character.life(), positionX = 0, positionY = 12)
+	const property heartBar = new HeartsBar(character = character, positionX = 0, positionY = 12)
 	const gameMenu = new MenuText()
 	const gameTitle = 'Sky Fruit Harvest'
 	const boardBackground = './img/background.png'
@@ -38,9 +38,6 @@ object configuration{
 		self.collisionWithCharacter()
 		self.loadHeartBar()
 	}
-	method clearScreen(){
-		game.clear()
-	}
 	
 	//GENERATE UI
 	method loadScreen(){
@@ -64,9 +61,10 @@ object configuration{
 		heartBar.hearts().forEach({ heart => game.addVisual(heart)})
 	}
 	method loseHeart(){
-		heartBar.characterHearts(1)
+		game.removeVisual(heartBar.getLastHeart())
+		heartBar.removeLastHeart()
 	}
-	
+
 	//KEYBOARD MOVEMENT
 	method defineKeys(){
 		keyboard.a().onPressDo{ character.moveLeft()}
@@ -77,6 +75,26 @@ object configuration{
 	//COLLISION WITH CHARACTER
 	method collisionWithCharacter(){
 		game.onCollideDo(character, { fallingObject => fallingObject.collisionWithCharacter(character) }) 
+	}
+	//GAME OVER
+	 
+	method checkEndConditions(){
+		if( self.isTheCharacterDead()){
+			self.gameOver()
+		}
+	}
+	method isTheCharacterDead() = character.isDead()
+	
+	method gameOver(){
+		self.clearScreen()
+		self.loadGameOverText()
+	}
+		
+	method clearScreen(){
+		game.clear()
+	}
+	method loadGameOverText(){ 
+		game.addVisual(new GameOverText(character = character))
 	}
 	
 }
