@@ -45,3 +45,13 @@ class Fruit inherits FallingObject{
 		image = ["./img/apple.png", "./img/orange.png", "./img/pear.png"].anyOne()	
 	}
 }
+class PoisonousObject inherits FallingObject{
+	override method collisionWithCharacter(character){
+		character.takeDamage()
+		configuration.loadHeartBar()
+		self.disappear()
+	}
+	override method selectFruitImage(){
+		image = "./img/poisonFruit.png"
+	}
+}

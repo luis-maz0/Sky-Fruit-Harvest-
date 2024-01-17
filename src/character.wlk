@@ -25,5 +25,18 @@ class Character{
 			position = self.position().right(1)
 		}
 	}
-	
+	//LIFE 
+	method takeDamage(){
+		if(not self.itsDead()){
+			self.loseLife()	
+		}
+	}
+	method itsDead() = life.equals(0)
+	method loseLife(){
+		configuration.loseHeart()
+		life -= 1
+	} 
+	method gainLife(){
+		life += 1 
+	}
 }

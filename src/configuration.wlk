@@ -2,11 +2,13 @@ import wollok.game.*
 import character.*
 import texts.*
 import fallingObjects.*
+import hearts.*
 
 object configuration{
 	//PROPERTIES
 	const character = new Character()
 	const characterScore = new ScoreText(character = character)
+	const property heartBar = new HeartBar(characterHearts = character.life(), positionX = 0, positionY = 12)
 	const gameMenu = new MenuText()
 	const gameTitle = 'Sky Fruit Harvest'
 	const boardBackground = './img/background.png'
@@ -34,6 +36,7 @@ object configuration{
 		self.defineKeys()
 		self.loadFallingObjects()
 		self.collisionWithCharacter()
+		self.loadHeartBar()
 	}
 	method clearScreen(){
 		game.clear()
@@ -54,6 +57,14 @@ object configuration{
 	}
 	method loadFallingObjects(){
 		game.onTick(300,"Fruits",{ new Fruit(eventName = "FallingFruits").appearObject()})
+		game.onTick(500,"Poison",{ new PoisonousObject(eventName = "FallingPoisonousObject").appearObject()})
+	}
+	method loadHeartBar(){
+		heartBar.createHeartBar()
+		heartBar.hearts().forEach({ heart => game.addVisual(heart)})
+	}
+	method loseHeart(){
+		heartBar.characterHearts(1)
 	}
 	
 	//KEYBOARD MOVEMENT
