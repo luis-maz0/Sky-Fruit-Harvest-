@@ -28,7 +28,8 @@ class Character{
 	//LIFE 
 	method takeDamage(){
 		if(not self.isDead()){
-			self.loseLife()	
+			self.loseLife()
+			self.screamPain()	
 		}
 	}
 	method isDead() = life < 1
@@ -37,5 +38,11 @@ class Character{
 	} 
 	method gainLife(){
 		life = life + 1 
+	}
+	method resetLife(){
+		life = 3
+	}
+	method screamPain(){
+		game.say(self, "OH M@#%!&R")
 	}
 }

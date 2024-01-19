@@ -29,6 +29,7 @@ object configuration{
 		}
 	} 
 	method startLevel(){
+		self.setInicialValues()
 		self.clearScreen()
 		self.loadScreen()
 		self.loadCharacter()
@@ -37,8 +38,12 @@ object configuration{
 		self.loadFallingObjects()
 		self.collisionWithCharacter()
 		self.loadHeartBar()
-	}
 	
+	}
+	method setInicialValues(){
+		character.resetScore()
+		character.resetLife()
+	}
 	//GENERATE UI
 	method loadScreen(){
 		game.title(gameTitle)
@@ -64,37 +69,51 @@ object configuration{
 		game.removeVisual(heartBar.getLastHeart())
 		heartBar.removeLastHeart()
 	}
-
 	//KEYBOARD MOVEMENT
 	method defineKeys(){
 		keyboard.a().onPressDo{ character.moveLeft()}
 		keyboard.d().onPressDo{ character.moveRight()}
 		keyboard.j().onPressDo{ /*Special items*/}
 		keyboard.k().onPressDo{ /*Special items*/}
-	}
+	} 
 	//COLLISION WITH CHARACTER
 	method collisionWithCharacter(){
 		game.onCollideDo(character, { fallingObject => fallingObject.collisionWithCharacter(character) }) 
 	}
 	//GAME OVER
-	 
 	method checkEndConditions(){
 		if( self.isTheCharacterDead()){
-			self.gameOver()
+			self.showGameOverScreen()
 		}
 	}
 	method isTheCharacterDead() = character.isDead()
-	
-	method gameOver(){
+	method showGameOverScreen(){
 		self.clearScreen()
 		self.loadGameOverText()
+		self.defineGameOverKeys()
 	}
-		
 	method clearScreen(){
 		game.clear()
 	}
 	method loadGameOverText(){ 
 		game.addVisual(new GameOverText(character = character))
+	}
+	//GAME OVER OPTIONS
+	method defineGameOverKeys(){
+		self.restartGame()
+		self.exitGame()
+	}
+	//KEYBOARD GAME OVER
+	method restartGame(){
+		keyboard.r().onPressDo{
+			self.clearScreen()
+			self.startLevel()
+		}
+	}
+	method exitGame(){
+		keyboard.e().onPressDo{ 
+			game.schedule(500,{ => game.stop()})
+		} 
 	}
 	
 }
