@@ -7,7 +7,7 @@ class Character{
 	var property score = 0
 	var property position = game.at(4,0)
 	const property image = './img/character_manu.png'
-	var property specialItems = []
+	var property specialFruits = []
 	
 	//SCORE
 	method score(value){ score += value }
@@ -44,5 +44,9 @@ class Character{
 	}
 	method screamPain(){
 		game.say(self, "OH M@#%!&R")
+	}
+	//SPECIAL FRUITS
+	method collectSpecialFruit(){
+		
 	}
 }

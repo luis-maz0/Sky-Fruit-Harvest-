@@ -58,8 +58,10 @@ object configuration{
 		game.addVisual( characterScore )
 	}
 	method loadFallingObjects(){
-		game.onTick(300,"Fruits",{ new Fruit(eventName = "FallingFruits").appearObject()})
-		game.onTick(500,"Poison",{ new PoisonousObject(eventName = "FallingPoisonousObject").appearObject()})
+		game.onTick(300,"Regular",{ new RegularFruit(eventName = "FallingRegularFruit").appearObject()})
+		game.onTick(500,"Poisonous",{ new PoisonousFruit(eventName = "FallingPoisonousFruit").appearObject()})
+		game.onTick(5000,"Revitalizing",{ new RevitalizingFruit(eventName = "FallingRevitalizingObject", speed = 100).appearObject()})
+		game.onTick(6000,"Rare",{ new RareFruit(eventName = "FallingRareObject", speed = 100).appearObject()})
 	}
 	method loadHeartBar(){
 		heartBar.createHeartBar()
@@ -71,7 +73,9 @@ object configuration{
 	}
 	//KEYBOARD MOVEMENT
 	method defineKeys(){
+		keyboard.left().onPressDo{character.moveLeft()}
 		keyboard.a().onPressDo{ character.moveLeft()}
+		keyboard.right().onPressDo{character.moveRight()}
 		keyboard.d().onPressDo{ character.moveRight()}
 		keyboard.j().onPressDo{ /*Special items*/}
 		keyboard.k().onPressDo{ /*Special items*/}
