@@ -46,7 +46,33 @@ class Character{
 		game.say(self, "OH M@#%!&R")
 	}
 	//SPECIAL FRUITS
-	method collectSpecialFruit(){
-		
+	method collectSpecialFruit(fruit){
+		if( not self.itIsOnListOfSpecialFruits(fruit)){
+			specialFruits.add(fruit)
+		}
+	}
+	method itIsOnListOfSpecialFruits(fruit) { 
+		return specialFruits.any({ specialFruit => specialFruit.name() == fruit.name() })
+	}	
+	method useSpecialFruit(fruitName){
+		self.validateSearchInSpecialFruits(fruitName)
+		self.consumeSpecialFruit(fruitName)
+		self.deleteFromSpecialFruits(fruitName)
+	}
+	method validateSearchInSpecialFruits(fruitName){
+		if(not self.specialFruitWasFound(fruitName)) self.error("NO TENGO " + fruitName)
+	}
+	method specialFruitWasFound(fruitName){
+		return specialFruits.any({specialFruit => specialFruit.nombre() == fruitName})
+	}
+	method consumeSpecialFruit(fruitName){
+		self.returnSpecialFruit(fruitName).consume(self)
+	}
+	method returnSpecialFruit(fruitName){
+		return specialFruits.find({ specialFruit => specialFruit.nombre() == fruitName})
+	}
+	method deleteFromSpecialFruits(fruitName){
+		if(self.specialFruitWasFound(fruitName))
+			specialFruits.removeAllSuchThat({ specialFruit => specialFruit.nombre() == fruitName})
 	}
 }

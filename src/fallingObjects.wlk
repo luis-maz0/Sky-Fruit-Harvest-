@@ -71,7 +71,6 @@ class RareFruit inherits RevitalizingFruit{
 		game.removeTickEvent(eventName)
 	}
 }
-
 class PoisonousFruit inherits FallingObject{
 	override method collisionWithCharacter(character){
 		character.takeDamage()
