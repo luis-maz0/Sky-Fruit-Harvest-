@@ -46,11 +46,12 @@ class RegularFruit inherits FallingObject{
 	}
 }
 class RevitalizingFruit inherits FallingObject{
+	const property name = "grapes"
 	const property boardPositionX = 7
 	const property boardPositionY = 12
 	
 	override method collisionWithCharacter(character){
-		//character.collectSpecialFruit(self)
+		character.collectSpecialFruit(self)
 		self.positionFruit()
 	}
 	override method selectFruitImage(){
@@ -62,6 +63,7 @@ class RevitalizingFruit inherits FallingObject{
 	}
 }
 class RareFruit inherits RevitalizingFruit{
+	override method name() = "pitahaya"
 	override method boardPositionX() = 8
 	override method selectFruitImage(){
 		image = "./img/pitahaya.png"
@@ -70,10 +72,16 @@ class RareFruit inherits RevitalizingFruit{
 		position = game.at(8,12)
 		game.removeTickEvent(eventName)
 	}
+	method consume(character){
+		character.scream("Oh geez")
+		character.score(500)
+		game.removeVisual(self)
+	}
 }
 class PoisonousFruit inherits FallingObject{
 	override method collisionWithCharacter(character){
 		character.takeDamage()
+		character.scream("OH M@#%!&R")
 		configuration.loseHeart()
 		configuration.checkEndConditions()
 		self.disappear()

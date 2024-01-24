@@ -28,8 +28,7 @@ class Character{
 	//LIFE 
 	method takeDamage(){
 		if(not self.isDead()){
-			self.loseLife()
-			self.screamPain()	
+			self.loseLife()	
 		}
 	}
 	method isDead() = life < 1
@@ -42,8 +41,8 @@ class Character{
 	method resetLife(){
 		life = 3
 	}
-	method screamPain(){
-		game.say(self, "OH M@#%!&R")
+	method scream(message){
+		game.say(self, message)
 	}
 	//SPECIAL FRUITS
 	method collectSpecialFruit(fruit){
@@ -60,19 +59,19 @@ class Character{
 		self.deleteFromSpecialFruits(fruitName)
 	}
 	method validateSearchInSpecialFruits(fruitName){
-		if(not self.specialFruitWasFound(fruitName)) self.error("NO TENGO " + fruitName)
+		if(not self.specialFruitWasFound(fruitName)) self.error("I don't have " + fruitName)
 	}
 	method specialFruitWasFound(fruitName){
-		return specialFruits.any({specialFruit => specialFruit.nombre() == fruitName})
+		return specialFruits.any({specialFruit => specialFruit.name() == fruitName})
 	}
 	method consumeSpecialFruit(fruitName){
 		self.returnSpecialFruit(fruitName).consume(self)
 	}
 	method returnSpecialFruit(fruitName){
-		return specialFruits.find({ specialFruit => specialFruit.nombre() == fruitName})
+		return specialFruits.find({ specialFruit => specialFruit.name() == fruitName})
 	}
 	method deleteFromSpecialFruits(fruitName){
 		if(self.specialFruitWasFound(fruitName))
-			specialFruits.removeAllSuchThat({ specialFruit => specialFruit.nombre() == fruitName})
+			specialFruits.removeAllSuchThat({ specialFruit => specialFruit.name() == fruitName})
 	}
 }

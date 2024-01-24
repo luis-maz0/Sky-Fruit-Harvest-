@@ -77,7 +77,7 @@ object configuration{
 		keyboard.a().onPressDo{ character.moveLeft()}
 		keyboard.right().onPressDo{character.moveRight()}
 		keyboard.d().onPressDo{ character.moveRight()}
-		keyboard.j().onPressDo{ /*Special items*/}
+		keyboard.j().onPressDo{ character.useSpecialFruit("pitahaya")}
 		keyboard.k().onPressDo{ /*Special items*/}
 	} 
 	//COLLISION WITH CHARACTER
