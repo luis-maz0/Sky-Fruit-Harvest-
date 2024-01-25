@@ -13,17 +13,19 @@ class HeartsBar inherits Heart{
 	
 	method characterHearts() = character.life()
 	
-	method createHeartBar(){	
+	method createHeartBar(){
 		self.characterHearts().times({ i => self.addHeart(i) })
 	}
 	method addHeart(amount){
-		hearts.add( new Heart(positionX = positionX + (amount-1) , positionY = positionY))
+		const newHeart = new Heart(positionX = positionX + (amount-1) , positionY = positionY) 
+		hearts.add( newHeart)
+		game.addVisual(newHeart)
 	}
 	method removeLastHeart(){
+		game.removeVisual(self.getLastHeart())
 		hearts.remove(self.getLastHeart())
 	}
 	method getLastHeart() = hearts.last()
-	
 	
 }
 

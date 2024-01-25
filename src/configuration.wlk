@@ -38,7 +38,6 @@ object configuration{
 		self.loadFallingObjects()
 		self.collisionWithCharacter()
 		self.loadHeartBar()
-	
 	}
 	method setInicialValues(){
 		character.resetScore()
@@ -65,11 +64,12 @@ object configuration{
 	}
 	method loadHeartBar(){
 		heartBar.createHeartBar()
-		heartBar.hearts().forEach({ heart => game.addVisual(heart)})
 	}
 	method loseHeart(){
-		game.removeVisual(heartBar.getLastHeart())
 		heartBar.removeLastHeart()
+	}
+	method gainHeart(){
+		heartBar.addHeart(character.life())
 	}
 	//KEYBOARD MOVEMENT
 	method defineKeys(){
@@ -77,8 +77,8 @@ object configuration{
 		keyboard.a().onPressDo{ character.moveLeft()}
 		keyboard.right().onPressDo{character.moveRight()}
 		keyboard.d().onPressDo{ character.moveRight()}
-		keyboard.j().onPressDo{ character.useSpecialFruit("pitahaya")}
-		keyboard.k().onPressDo{ /*Special items*/}
+		keyboard.j().onPressDo{ character.useSpecialFruit("grapes")}
+		keyboard.k().onPressDo{ character.useSpecialFruit("pitahaya")}
 	} 
 	//COLLISION WITH CHARACTER
 	method collisionWithCharacter(){

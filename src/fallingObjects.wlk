@@ -61,6 +61,14 @@ class RevitalizingFruit inherits FallingObject{
 		position = game.at(self.boardPositionX(),self.boardPositionY())
 		game.removeTickEvent(eventName)
 	}
+	method consume(character){
+		if( character.life() < 3){
+			character.gainLife()
+			configuration.gainHeart()
+			character.scream("Nice!")	
+		}
+		game.removeVisual(self)
+	}
 }
 class RareFruit inherits RevitalizingFruit{
 	override method name() = "pitahaya"
@@ -72,7 +80,7 @@ class RareFruit inherits RevitalizingFruit{
 		position = game.at(8,12)
 		game.removeTickEvent(eventName)
 	}
-	method consume(character){
+	override method consume(character){
 		character.scream("Oh geez")
 		character.score(500)
 		game.removeVisual(self)

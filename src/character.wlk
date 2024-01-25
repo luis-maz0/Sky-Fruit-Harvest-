@@ -31,12 +31,15 @@ class Character{
 			self.loseLife()	
 		}
 	}
-	method isDead() = life < 1
+	method isDead() = life.equals(0)
 	method loseLife(){
-		life = life - 1
+		life -= 1
 	} 
 	method gainLife(){
-		life = life + 1 
+		if(life < 3){
+			life += 1	
+		}
+		 	
 	}
 	method resetLife(){
 		life = 3
