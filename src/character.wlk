@@ -77,4 +77,7 @@ class Character{
 		if(self.specialFruitWasFound(fruitName))
 			specialFruits.removeAllSuchThat({ specialFruit => specialFruit.name() == fruitName})
 	}
+	method clearListOfSpecialFruits(){
+		specialFruits.clear()
+	}
 }

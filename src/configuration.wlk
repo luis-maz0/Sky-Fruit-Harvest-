@@ -42,6 +42,7 @@ object configuration{
 	method setInicialValues(){
 		character.resetScore()
 		character.resetLife()
+		character.clearListOfSpecialFruits()
 	}
 	//GENERATE UI
 	method loadScreen(){
