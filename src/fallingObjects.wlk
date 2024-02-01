@@ -4,7 +4,7 @@ import configuration.*
 class FallingObject {
 	var property image = null
 	var property eventName
-	var property speed = 200
+	var property speed = 100
 	var property fallingObjectX = 9
 	var property fallingObjectY = 11
 	var property position = game.at( 0.randomUpTo(fallingObjectX),fallingObjectY)
@@ -65,7 +65,7 @@ class RevitalizingFruit inherits FallingObject{
 		if( character.life() < 3){
 			character.gainLife()
 			configuration.gainHeart()
-			character.scream("Nice!")	
+			character.scream("Wubba Lubba Dub Dub!")	
 		}
 		game.removeVisual(self)
 	}
@@ -81,8 +81,8 @@ class RareFruit inherits RevitalizingFruit{
 		game.removeTickEvent(eventName)
 	}
 	override method consume(character){
-		character.scream("Oh geez")
-		character.score(500)
+		character.scream("Oh Geez")
+		character.score(300)
 		game.removeVisual(self)
 	}
 }
